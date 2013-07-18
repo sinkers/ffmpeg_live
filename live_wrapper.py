@@ -30,9 +30,9 @@ logging.basicConfig(level=logging.DEBUG,
 
 FFMPEG = "/usr/local/bin/ffmpeg"
 FFPROBE = "/usr/local/bin/ffprobe"
-RTMP_SRC = "rtmp://cp30129a.live.edgefcs.net/live/videoops-videoops@50541"
-RTMP_SRC = "rtmp://wowsyd.sinclairmediatech.com/live/input"
-RTMP_DEST = "rtmp://wowsyd.sinclairmediatech.com/live/canberra2"
+RTMP_SRC = ""
+RTMP_SRC = ""
+RTMP_DEST = ""
 
 STREAM_RUNNING = "Press [q] to stop"
 
