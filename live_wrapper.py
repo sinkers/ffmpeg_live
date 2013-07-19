@@ -19,7 +19,6 @@ import sys
 import os
 from subprocess import PIPE, Popen
 from threading  import Thread
-import atexit
 import time
 import logging
 
