@@ -40,7 +40,7 @@ SLEEP_TIME = 30
 FFPROBE = "/usr/local/bin/ffprobe"
 
 # List of streams to check
-CHECK_STREAMS = ['rtmp://wowsyd.sinclairmediatech.com/live/canberra','http://wowsyd.sinclairmediatech.com/live/canberra/playlist.m3u8']
+CHECK_STREAMS = ['http://wowsyd.sinclairmediatech.com/live/canberra/playlist.m3u8', 'http://repackage.video.news.com.au/live/canberra/playlist.m3u8']
 
 ON_POSIX = 'posix' in sys.builtin_module_names
 
@@ -126,6 +126,8 @@ def probe(stream):
             Input/output error
             
             Need a regex to match for video found!
+            Sample: Stream #0:0: Video: h264 (Baseline), yuv420p, 640x360 [SAR 1:1 DAR 16:9], 655 kb/s, 25 tbr, 1k tbn, 50 tbc
+            Should also look for audio
             '''
            
             if ("Stream #0:0: Video" in line):
@@ -138,6 +140,11 @@ def probe(stream):
                 return True
             elif ("error" in line):
                 return False
+            elif (probeq.poll() > 0):
+                return False
+            
+            # Make sure we don't spin out of control
+            time.sleep(1)
             
         except Empty:
             pass
@@ -163,6 +170,11 @@ while(True):
             pass
         else:
             logging.info("Error with " + stream + " sending alert")
+            '''
+            This needs to check if there has already been an error message sent
+            If so it shouldn't send another one for x mins
+            Also needs to send a message when the problem is cleared
+            '''
             send_message(stream)
             
     time.sleep(SLEEP_TIME)
