@@ -119,7 +119,7 @@ def probe(stream):
 #        print probeq.join()
         try:
             line = probeq.get_nowait()
-            #logging.info(line)
+            logging.info(line)
             '''
             Possible error responses:
             Server error: Failed to play stream
@@ -144,7 +144,7 @@ def probe(stream):
                 return False
             
             # Make sure we don't spin out of control
-            time.sleep(1)
+            #time.sleep(1)
             
         except Empty:
             pass
