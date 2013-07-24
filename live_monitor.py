@@ -140,7 +140,7 @@ def probe(stream):
                 return True
             elif ("error" in line):
                 return False
-            elif (probeq.poll() > 0):
+            elif (probeproc.poll() > 0):
                 return False
             
             # Make sure we don't spin out of control
